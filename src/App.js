@@ -7,17 +7,18 @@ import Login from "./App/pages/Login";
 
 function App() {
   return (
-    <Router>
-        <Fragment>
-            <Routes>
-                <Route path='/admin' element={<PrivateRoute />}>
-                    <Route path='/admin/dashboard' element={<WalletDashboard />} />
-                </Route>
-                <Route path='/login' element={<Login />} />
-                <Route path='/logout' element={<LogOut />} />} />
-            </Routes>
-        </Fragment>
-    </Router>
+      <Router>
+          <Fragment>
+              <Routes>
+                  <Route path='/' element={<Login />} />
+                  <Route path='/admin' element={<PrivateRoute />}>
+                      <Route path='/admin/dashboard' element={<WalletDashboard />} />
+                  </Route>
+                  <Route path='/login' element={<Login />} />
+                  <Route path='/logout' element={<LogOut />} />} />
+              </Routes>
+          </Fragment>
+      </Router>
   );
 }
 
