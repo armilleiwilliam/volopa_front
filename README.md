@@ -36,13 +36,13 @@ contact me. I hope the following instructions are clear enough.
   1 hour for testing purposes (check Laravel application in the file config/sanctum.php). The component "PrivateRoute"  
   regenerates a new token each time the page is loaded and set a new time out which after 55 min (before the expiring time)
   regenerates a new token in case no page has been reloaded.
-- the Rate checker converts on amount provided from the currency selected to the final chosen currency and show the results
+- the rate checker converts on amount provided from the currency selected to the final chosen currency and show the results
   in a Modal (see screenshots in root folder). I have noticed that in your template there were two amounts fields, I didn't
   understand why two as you usually put only the amount to exchange, you select the currency "from" and currency "to" and
   when you submit the code should calculate the exchanged amount. Or probably it was me not having understood what was requested.
   If that is the case I apologize about that, I have decided to do the test challenge the only time I had which is over the
   weekend when I could not contact you for obvious reasons asking for further explanations.
-  I hope you can accept the code the way I have developed it any way.
+  I hope you can accept the code the way I have developed it anyway.
 
 
 ## Axios

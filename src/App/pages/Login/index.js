@@ -67,20 +67,24 @@ function Login() {
 
                         // redirect to dashboard once login completed
                         window.location.href = "/admin/dashboard";
+                    } else {
+
                     }
                 }).catch(err => {
 
-                    // prevent from showing server errors validation message if front validation is not passed
-                    if (err.message !== "Request failed with status code 422") {
-
-                        // show server error
-                        let message = err.message == "Network Error" ? err.message + ". Please, check your connection to back end app." : err.message;
-                        setBackEndErrorFrom({
-                            error_message: message,
-                            error_title: 'Check the following',
-                            show_modal: true,
-                        });
+                    // process server validation and connection errors
+                    var ErrorMessage = "An error has occured please try again or contact customer service";
+                    if (typeof err.response !== "undefined" && err.response.data.message) {
+                        ErrorMessage = err.response.data.message;
+                    } else {
+                        ErrorMessage = err.message == "Network Error" ? err.message + ". Please, check your connection to back end app." : err.message;
                     }
+
+                    setBackEndErrorFrom({
+                        error_message: ErrorMessage,
+                        error_title: 'Check the following',
+                        show_modal: true,
+                    });
                 });
         }
     }
