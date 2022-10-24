@@ -12,7 +12,7 @@ function Login() {
         password: '',
     });
 
-    const [errorsField, setErrorsField] = useState({}, SubmitLogin);
+    const [errorsField, setErrorsField] = useState({});
     const [backEndErrorFrom, setBackEndErrorFrom] = useState({});
 
     // validate fields before submitting
