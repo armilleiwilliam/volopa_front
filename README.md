@@ -12,6 +12,7 @@ double type hints on ExchangeRate Model)
 (this command creates tables and populate them with rate data and login details needed for the project,
 the rates are totally invented)
 #### php artisan serve (copy the link provided for the next part of the installation)
+#### if you click on the link provided it might suggest to click on "Generate App Key" button and refresh the page
 
 ## React front end Installation
 ##### git clone git@github.com:armilleiwilliam/volopa_front.git
