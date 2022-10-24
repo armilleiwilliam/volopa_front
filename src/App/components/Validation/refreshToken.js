@@ -14,10 +14,6 @@ export const refreshToken = () => {
 
                 // store token
                 localStorage.setItem('auth_token', response.token);
-                let timeElapsedToken = Date.now();
-
-                // check when the token was stored to be renewed after one hour
-                localStorage.setItem('time_token_set', timeElapsedToken);
             }
         });
 }

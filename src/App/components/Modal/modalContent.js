@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {ModalDataContext} from "../RateChecker";
 
+// Modal showing successful and unsuccessful message alerts
 function ModalContent() {
     const modalContext = React.useContext(ModalDataContext);
     return (

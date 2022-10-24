@@ -1,10 +1,9 @@
 import {Button, Card, Col, Form, Input, Row, Typography} from "antd";
 import axios from "axios";
 import {validateEmail} from "../../components/Validation";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Modal from "../../components/Modal";
 import {ModalDataContext} from "../../components/RateChecker";
-import {Navigate} from "react-router-dom";
 
 function Login() {
 
@@ -13,9 +12,10 @@ function Login() {
         password: '',
     });
 
-    const [errorsField, setErrorsField] = useState({});
+    const [errorsField, setErrorsField] = useState({}, SubmitLogin);
     const [backEndErrorFrom, setBackEndErrorFrom] = useState({});
 
+    // validate fields before submitting
     const formValidation = (formFields) => {
         const {email, password} = formFields;
         const errors = {};
@@ -25,6 +25,7 @@ function Login() {
         return errors;
     };
 
+    // Update state each field update
     const handleChange = (e) => {
         setFormFields({
             ...formFields,
@@ -32,15 +33,21 @@ function Login() {
         });
     }
 
+    // Login
     const SubmitLogin = async (e) => {
 
         e.preventDefault();
+
+        // reset modal show staate
         setBackEndErrorFrom({
             show_modal: false
         });
+
+        // fields validation
         const errors = formValidation(formFields);
         setErrorsField(errors);
 
+        // if no front validation errors proceed with submitting the login request
         if (Object.keys(errorsField).length === 0) {
             let payload = {
                 email: formFields.email,
@@ -57,20 +64,23 @@ function Login() {
 
                         // store token
                         localStorage.setItem('auth_token', response.token);
-                        const timeElapsed = Date.now();
-
-                        // check when the token was stored to renews after one hour
-                        localStorage.setItem('time_token_set', timeElapsed);
 
                         // redirect to dashboard once login completed
                         window.location.href = "/admin/dashboard";
                     }
                 }).catch(err => {
-                    setBackEndErrorFrom({
-                        error_message: err.response.data.message,
-                        error_title: 'Check the following',
-                        show_modal: true,
-                    });
+
+                    // prevent from showing server errors validation message if front validation is not passed
+                    if (err.message !== "Request failed with status code 422") {
+
+                        // show server error
+                        let message = err.message == "Network Error" ? err.message + ". Please, check your connection to back end app." : err.message;
+                        setBackEndErrorFrom({
+                            error_message: message,
+                            error_title: 'Check the following',
+                            show_modal: true,
+                        });
+                    }
                 });
         }
     }
@@ -97,7 +107,7 @@ function Login() {
                                     onSubmitCapture={(e) => SubmitLogin(e)}
                                 >
                                     <Form.Item
-                                        label={<span className="muli semi-bold m-l-20 m-r-15">Email</span>}
+                                        label={<span className="muli semi-bold m-l-20 m-r-20">Email</span>}
                                         name='email'
 
                                     >
@@ -108,7 +118,7 @@ function Login() {
                                         )}
                                     </Form.Item>
                                     <Form.Item
-                                        label={<span className="muli semi-bold">Password</span>}
+                                        label={<span className="muli semi-bold m-r-15">Password</span>}
                                         name='password'>
                                         <Input.Password value={formFields.password} name="password" id="password"
                                                         onChange={(e) => handleChange(e)}/>

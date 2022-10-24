@@ -2,21 +2,16 @@ import React from "react";
 import {Navigate, Outlet} from "react-router-dom";
 import {refreshToken} from "../Validation/refreshToken";
 
+var tokenTimeOut = null;
 export const PrivateRoute = () => {
     let auth = null;
+
     if (localStorage.getItem("auth_token") !== null) {
         auth = true;
 
-        let timeToken = localStorage.getItem('time_token_set');
-        let now = Date.now();
-
-        // time difference since token was crated
-        let timeDifference = Math.round((now - timeToken) / 60000);
-
-        // the token expires after one hour, at 55 min it will be refreshed
-        if(timeDifference > 55){
-            refreshToken();
-        }
+        // refresh token after 55 min, right before the 1 hour expiration time
+        clearTimeout(tokenTimeOut);
+        tokenTimeOut = setTimeout(refreshToken(), 1000 * 60 * 55);
     }
 
     // If authorized, return an outlet that will render child elements

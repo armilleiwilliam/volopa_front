@@ -1,15 +1,12 @@
 import {Row, Col, Typography, Card, Form, Input, Select, Space, Progress, Button} from 'antd'
 import React, {createContext, useState} from "react";
 import axios from "axios";
-import walletData from './../WalletBreakdown/store/data';
 import Modal from './../Modal/index';
 import {refreshToken} from "../Validation/refreshToken";
 
 export const ModalDataContext = createContext(undefined);
 
 export function RateChecker() {
-
-
     const [formAmounts, setFormAmounts] = useState({
         amount_to_exchange: '',
         amount_exchanged: '',
@@ -20,17 +17,9 @@ export function RateChecker() {
         error_message: ''
     });
 
-    const [checkerResults, setCheckerResults] = useState({
-        amount_to_exchange: '',
-        amount_exchanged: '',
-        currencyTo: '',
-        currencyFrom: '',
-        rate: '',
-        error_title: '',
-    });
-
     const [errors, setErrors] = useState({});
 
+    // validate checker fields
     const formValidation = (formData) => {
         const {amount_to_exchange, currencyTo, currencyFrom} = formAmounts;
         const errors = {};
@@ -40,6 +29,7 @@ export function RateChecker() {
         return errors;
     };
 
+    // update state on each field update
     const handleChange = (e) => {
         setFormAmounts({
             ...formAmounts,
@@ -50,6 +40,7 @@ export function RateChecker() {
         setErrors(errors);
     }
 
+    // update setFormAmounts state on both "axios" and "interceptor response" code below
     const setFormValues = (response) => {
         if (response.data.message == "success") {
             let result = response.data.data;
@@ -81,6 +72,7 @@ export function RateChecker() {
         });
     }
 
+    // Starts conversion
     const convertAmounts = async (e) => {
         e.preventDefault();
         const errors = formValidation(formAmounts);
@@ -94,7 +86,6 @@ export function RateChecker() {
                 amount: formAmounts.amount_to_exchange
             }
 
-            const token = localStorage.getItem('auth_token');
             axios.interceptors.request.use(
                 (config) => {
                     const token = localStorage.getItem('auth_token');

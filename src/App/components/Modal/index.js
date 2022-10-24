@@ -20,7 +20,7 @@ function ModalBase() {
             <Modal show={smShow} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        {modalContext.error_title !== "" ? modalContext.error_title : "Conversion result:"}
+                        {modalContext.error_title !== "" ? "Please, check the following:" : "Conversion result:"}
                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
