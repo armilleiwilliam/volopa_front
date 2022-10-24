@@ -2,8 +2,9 @@
 
 I suggest to start installing the back end as you need the url endpoint to start the front end
 
-## Laravel back end installation:
-(You find these same instructions on the back end app as well)
+## Laravel back end installation (Laravel 9, Php 8):
+(You find these same instructions on the back end app as well, if you run the app on a php 7 version remove the return
+double type hints on ExchangeRate Model)
 ##### git clone git@github.com:armilleiwilliam/volopa_backend.git
 ##### set the connection to your local database on env. file
 ##### composer install
