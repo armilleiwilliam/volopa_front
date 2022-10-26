@@ -42,7 +42,7 @@ export function RateChecker() {
 
     // update setFormAmounts state on both "axios" and "interceptor response" code below
     const setFormValues = (response) => {
-        if (response.data.message == "success") {
+        if (response.data.message === "success") {
             let result = response.data.data;
             setFormAmounts({
                 amount_to_exchange: result.amount_to_exchange,
@@ -63,13 +63,6 @@ export function RateChecker() {
                 show_modal: true,
             });
         }
-    }
-
-    const resetRateBox = (e) => {
-        setFormAmounts({
-            ...formAmounts,
-            rate: ''
-        });
     }
 
     // Starts conversion
@@ -101,7 +94,7 @@ export function RateChecker() {
             );
 
             // Api request to Laravel: amount conversion
-            let rateCheckerResponse = await axios.post(`${process.env.REACT_APP_LARAVEL_SITE}/exchange-rate`,
+            await axios.post(`${process.env.REACT_APP_LARAVEL_SITE}/exchange-rate`,
                 payload
             ).then(response => {
                 setFormValues(response);
