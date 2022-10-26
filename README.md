@@ -51,3 +51,6 @@ contact me. I hope the following instructions are clear enough.
 
 ## React Context
 I have used React standard context tool for developing the Modal
+
+## Test
+- to run the test on Laravel "php artisan test"
