@@ -1,11 +1,10 @@
 import { Col, Divider, Row, Table, Typography, Layout } from "antd";
 import AlertsCarousel from "../../components/AlertsCarousel";
 import DashboardCarousel from "../../components/DashboardCarousel";
-import {RateChecker, BigBox} from "../../components/RateChecker";
+import {RateChecker} from "../../components/RateChecker";
 import WalletBreakdown from "../../components/WalletBreakdown";
 import NavBar from "../../components/NavBar";
 import { columns, dashboardProps, data } from "./store/data";
-import Modal from "../../components/Modal";
 import React from "react";
 
 function WalletDashboard() {

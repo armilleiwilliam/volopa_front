@@ -1,7 +1,7 @@
 import {Button, Card, Col, Form, Input, Row, Typography} from "antd";
 import axios from "axios";
 import {validateEmail} from "../../components/Validation";
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Modal from "../../components/Modal";
 import {ModalDataContext} from "../../components/RateChecker";
 
@@ -56,7 +56,7 @@ function Login() {
             await axios.post(`${process.env.REACT_APP_LARAVEL_SITE}/login`, payload)
                 .then(resp => {
                     let response = resp.data.data;
-                    if (resp.data.message == "success") {
+                    if (resp.data.message === "success") {
 
                         // store password for refreshing the token
                         localStorage.setItem('email', formFields.email);
@@ -77,7 +77,7 @@ function Login() {
                     if (typeof err.response !== "undefined" && err.response.data.message) {
                         ErrorMessage = err.response.data.message;
                     } else {
-                        ErrorMessage = err.message == "Network Error" ? err.message + ". Please, check your connection to back end app." : err.message;
+                        ErrorMessage = err.message === "Network Error" ? err.message + ". Please, check your connection to back end app." : err.message;
                     }
 
                     setBackEndErrorFrom({
